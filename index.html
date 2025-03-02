@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+							<style>
+								body {
+									background-color: white; /* Ensure the iframe has a white background */
+								}
+
+								
+							</style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -37,13 +52,14 @@
         /* Inner scrollable container */
         .inner-container {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 66.666%;
-            padding-top: 37.5%;
+            top: 20px; /* Fixed distance from the top */
+            right: 20px; /* Fixed distance from the right */
+            width: 66.666%; /* 2/3 of the viewport width */
+            padding-top: 37.5%; /* Maintain 16:9 aspect ratio */
             overflow-y: auto;
             background: white;
             border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         /* Close buttons */
@@ -93,7 +109,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 20;
         }
 
@@ -133,6 +149,15 @@
             max-width: 100%;
             height: auto;
         }
+
+        /* Scrollable image styling */
+        .inner-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -157,76 +182,77 @@
         </div>
     </div>
 
-    <!-- Linked Image Overlays -->
+    <!-- Darken Overlay -->
     <div class="darken-overlay" id="darkenOverlay"></div>
-    
-    <!-- Overlay 1 -->
+
+    <!-- Linked Image Overlays -->
+    <!-- Overlay 1: Comm is Key -->
     <div class="image-overlay" id="commIsKey">
         <button class="close-overlay" onclick="closeLinkedOverlay('commIsKey')">×</button>
         <img src="https://i.ibb.co/sdpJYxTg/2.png" alt="Comm is Key">
     </div>
-    
-    <!-- Overlay 2 -->
+
+    <!-- Overlay 2: Theory Practice -->
     <div class="image-overlay" id="theoryPractice">
         <button class="close-overlay" onclick="closeLinkedOverlay('theoryPractice')">×</button>
         <img src="https://i.ibb.co/gZhFSVty/3.png" alt="Theory Practice">
     </div>
-    
-    <!-- Overlay 3 -->
+
+    <!-- Overlay 3: Cognitive Matter -->
     <div class="image-overlay" id="cognitiveMatter">
         <button class="close-overlay" onclick="closeLinkedOverlay('cognitiveMatter')">×</button>
         <img src="https://i.ibb.co/TBM5x8mR/4.png" alt="Cognitive Matter">
     </div>
-    
-    <!-- Overlay 4 -->
+
+    <!-- Overlay 4: Automate -->
     <div class="image-overlay" id="automate">
         <button class="close-overlay" onclick="closeLinkedOverlay('automate')">×</button>
         <img src="https://i.ibb.co/LXJprQYZ/5.png" alt="Automate">
     </div>
-    
-    <!-- Overlay 5 -->
+
+    <!-- Overlay 5: Meaningful -->
     <div class="image-overlay" id="meaningful">
         <button class="close-overlay" onclick="closeLinkedOverlay('meaningful')">×</button>
         <img src="https://i.ibb.co/2DBcnqR/6.png" alt="Meaningful">
     </div>
-    
-    <!-- Overlay 6 -->
+
+    <!-- Overlay 6: Anticipate Rewards -->
     <div class="image-overlay" id="anticipateRewards">
         <button class="close-overlay" onclick="closeLinkedOverlay('anticipateRewards')">×</button>
         <img src="https://i.ibb.co/PGzsWmxG/7.png" alt="Anticipate Rewards">
     </div>
-    
-    <!-- Overlay 7 -->
+
+    <!-- Overlay 7: Intrinsic -->
     <div class="image-overlay" id="intrinsic">
         <button class="close-overlay" onclick="closeLinkedOverlay('intrinsic')">×</button>
         <img src="https://i.ibb.co/5qbHM3k/8.png" alt="Intrinsic">
     </div>
-    
-    <!-- Overlay 8 -->
+
+    <!-- Overlay 8: Investment -->
     <div class="image-overlay" id="investment">
         <button class="close-overlay" onclick="closeLinkedOverlay('investment')">×</button>
         <img src="https://i.ibb.co/CS07fX3/9.png" alt="Investment">
     </div>
-    
-    <!-- Overlay 9 -->
+
+    <!-- Overlay 9: Promote Autonomy -->
     <div class="image-overlay" id="promoteAutonomy">
         <button class="close-overlay" onclick="closeLinkedOverlay('promoteAutonomy')">×</button>
         <img src="https://i.ibb.co/99zsfqJp/10.png" alt="Promote Autonomy">
     </div>
-    
-    <!-- Overlay 10 -->
+
+    <!-- Overlay 10: Access Domain -->
     <div class="image-overlay" id="accessDomain">
         <button class="close-overlay" onclick="closeLinkedOverlay('accessDomain')">×</button>
         <img src="https://i.ibb.co/7xnMnc35/11.png" alt="Access Domain">
     </div>
-    
-    <!-- Overlay 11 -->
+
+    <!-- Overlay 11: Language-Culture -->
     <div class="image-overlay" id="languageCulture">
         <button class="close-overlay" onclick="closeLinkedOverlay('languageCulture')">×</button>
         <img src="https://i.ibb.co/3yMtBjSy/12.png" alt="Language-Culture">
     </div>
-    
-    <!-- Overlay 12 -->
+
+    <!-- Overlay 12: Communicative Competence -->
     <div class="image-overlay" id="communicativeCompetence">
         <button class="close-overlay" onclick="closeLinkedOverlay('communicativeCompetence')">×</button>
         <img src="https://i.ibb.co/tpRP81HS/13.png" alt="Communicative Competence">
@@ -260,12 +286,14 @@
         function switchToSecondary() {
             document.getElementById('mainPage').style.display = 'none';
             document.getElementById('secondaryPage').style.display = 'block';
+            scaleCoordinates(); // Rescale coordinates after switching
         }
 
         // Switch back to main page
         function switchToMain() {
             document.getElementById('secondaryPage').style.display = 'none';
             document.getElementById('mainPage').style.display = 'block';
+            scaleCoordinates(); // Rescale coordinates after switching
         }
 
         // Open scroll container
@@ -329,3 +357,12 @@
     </script>
 </body>
 </html>
+
+
+
+							<script>
+                            	
+							</script>
+                        </body>
+                        </html>
+                    
