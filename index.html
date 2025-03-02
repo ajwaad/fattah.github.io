@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Main/Secondary Container */
+        .page-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+        }
+
+        /* Hide secondary page by default */
+        #secondaryPage {
+            display: none;
+            z-index: 10;
+        }
+
+        /* Scrollable Container */
+        .outer-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.ibb.co/nsdWYWYV/Add-a-subheading-7.png') no-repeat center center;
+            background-size: cover;
+            z-index: 15;
+        }
+
+        /* Inner scrollable container */
+        .inner-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 66.666%;
+            padding-top: 37.5%;
+            overflow-y: auto;
+            background: white;
+            border-radius: 12px;
+        }
+
+        /* Close buttons */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 3;
+            background: transparent;
+            border: none;
+            color: #333;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            color: #666;
+        }
+
+        .close-btn::before,
+        .close-btn::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: currentColor;
+            border-radius: 2px;
+            transition: transform 0.2s;
+        }
+
+        .close-btn::before { transform: rotate(45deg); }
+        .close-btn::after { transform: rotate(-45deg); }
+        .close-btn:hover::before { transform: rotate(90deg); }
+        .close-btn:hover::after { transform: rotate(0deg); }
+
+        /* Overlay for linked images */
+        .darken-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 20;
+        }
+
+        .image-overlay {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 80%;
+            max-height: 80%;
+            z-index: 25;
+            border-radius: 8px;
+        }
+
+        /* Close overlay button */
+        .close-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #333;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 30;
+        }
+
+        /* Responsive images */
+        .page-container img,
+        .image-overlay img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Page -->
+    <div class="page-container" id="mainPage">
+        <img src="https://i.ibb.co/8L1K57T8/Add-a-subheading-5.png" usemap="#map1" id="mainImage">
+    </div>
+
+    <!-- Secondary Page -->
+    <div class="page-container" id="secondaryPage">
+        <img src="https://i.ibb.co/70QCb8H/Add-a-subheading-6.png" usemap="#secondaryMap" id="secondaryImage">
+    </div>
+
+    <!-- Scrollable Container -->
+    <div class="outer-container" id="scrollContainer">
+        <div class="inner-container">
+            <button class="close-btn" onclick="closeScrollContainer()"></button>
+            <img 
+                src="https://i.ibb.co/0RNDpCQr/Black-and-Blue-3-D-Gradient-Business-Innovation-Infographic.jpg" 
+                alt="Scrollable Infographic"
+            >
+        </div>
+    </div>
+
+    <!-- Linked Image Overlays -->
+    <div class="darken-overlay" id="darkenOverlay"></div>
+    
+    <!-- Overlay 1 -->
+    <div class="image-overlay" id="commIsKey">
+        <button class="close-overlay" onclick="closeLinkedOverlay('commIsKey')">×</button>
+        <img src="https://i.ibb.co/sdpJYxTg/2.png" alt="Comm is Key">
+    </div>
+    
+    <!-- Overlay 2 -->
+    <div class="image-overlay" id="theoryPractice">
+        <button class="close-overlay" onclick="closeLinkedOverlay('theoryPractice')">×</button>
+        <img src="https://i.ibb.co/gZhFSVty/3.png" alt="Theory Practice">
+    </div>
+    
+    <!-- Overlay 3 -->
+    <div class="image-overlay" id="cognitiveMatter">
+        <button class="close-overlay" onclick="closeLinkedOverlay('cognitiveMatter')">×</button>
+        <img src="https://i.ibb.co/TBM5x8mR/4.png" alt="Cognitive Matter">
+    </div>
+    
+    <!-- Overlay 4 -->
+    <div class="image-overlay" id="automate">
+        <button class="close-overlay" onclick="closeLinkedOverlay('automate')">×</button>
+        <img src="https://i.ibb.co/LXJprQYZ/5.png" alt="Automate">
+    </div>
+    
+    <!-- Overlay 5 -->
+    <div class="image-overlay" id="meaningful">
+        <button class="close-overlay" onclick="closeLinkedOverlay('meaningful')">×</button>
+        <img src="https://i.ibb.co/2DBcnqR/6.png" alt="Meaningful">
+    </div>
+    
+    <!-- Overlay 6 -->
+    <div class="image-overlay" id="anticipateRewards">
+        <button class="close-overlay" onclick="closeLinkedOverlay('anticipateRewards')">×</button>
+        <img src="https://i.ibb.co/PGzsWmxG/7.png" alt="Anticipate Rewards">
+    </div>
+    
+    <!-- Overlay 7 -->
+    <div class="image-overlay" id="intrinsic">
+        <button class="close-overlay" onclick="closeLinkedOverlay('intrinsic')">×</button>
+        <img src="https://i.ibb.co/5qbHM3k/8.png" alt="Intrinsic">
+    </div>
+    
+    <!-- Overlay 8 -->
+    <div class="image-overlay" id="investment">
+        <button class="close-overlay" onclick="closeLinkedOverlay('investment')">×</button>
+        <img src="https://i.ibb.co/CS07fX3/9.png" alt="Investment">
+    </div>
+    
+    <!-- Overlay 9 -->
+    <div class="image-overlay" id="promoteAutonomy">
+        <button class="close-overlay" onclick="closeLinkedOverlay('promoteAutonomy')">×</button>
+        <img src="https://i.ibb.co/99zsfqJp/10.png" alt="Promote Autonomy">
+    </div>
+    
+    <!-- Overlay 10 -->
+    <div class="image-overlay" id="accessDomain">
+        <button class="close-overlay" onclick="closeLinkedOverlay('accessDomain')">×</button>
+        <img src="https://i.ibb.co/7xnMnc35/11.png" alt="Access Domain">
+    </div>
+    
+    <!-- Overlay 11 -->
+    <div class="image-overlay" id="languageCulture">
+        <button class="close-overlay" onclick="closeLinkedOverlay('languageCulture')">×</button>
+        <img src="https://i.ibb.co/3yMtBjSy/12.png" alt="Language-Culture">
+    </div>
+    
+    <!-- Overlay 12 -->
+    <div class="image-overlay" id="communicativeCompetence">
+        <button class="close-overlay" onclick="closeLinkedOverlay('communicativeCompetence')">×</button>
+        <img src="https://i.ibb.co/tpRP81HS/13.png" alt="Communicative Competence">
+    </div>
+
+    <!-- Image Maps -->
+    <map name="map1">
+        <area shape="rect" coords="662,110,1773,393" href="javascript:switchToSecondary()">
+        <area shape="rect" coords="659,531,1778,821" href="javascript:openScrollContainer()">
+    </map>
+
+    <map name="secondaryMap">
+        <area shape="rect" coords="1666,973,1761,1051" href="javascript:switchToMain()">
+        <area shape="circle" coords="1846,1012,41" href="javascript:switchToMain()">
+        <area shape="rect" coords="756,237,1008,409" href="javascript:showLinkedOverlay('commIsKey')">
+        <area shape="rect" coords="1030,239,1293,412" href="javascript:showLinkedOverlay('theoryPractice')">
+        <area shape="rect" coords="1305,237,1565,412" href="javascript:showLinkedOverlay('cognitiveMatter')">
+        <area shape="rect" coords="1582,238,1848,415" href="javascript:showLinkedOverlay('automate')">
+        <area shape="rect" coords="754,454,1012,624" href="javascript:showLinkedOverlay('meaningful')">
+        <area shape="rect" coords="1032,458,1290,631" href="javascript:showLinkedOverlay('anticipateRewards')">
+        <area shape="rect" coords="1310,453,1560,627" href="javascript:showLinkedOverlay('intrinsic')">
+        <area shape="rect" coords="1583,456,1839,626" href="javascript:showLinkedOverlay('investment')">
+        <area shape="rect" coords="751,675,1012,844" href="javascript:showLinkedOverlay('promoteAutonomy')">
+        <area shape="rect" coords="1034,675,1287,848" href="javascript:showLinkedOverlay('accessDomain')">
+        <area shape="rect" coords="1309,675,1565,846" href="javascript:showLinkedOverlay('languageCulture')">
+        <area shape="rect" coords="1585,675,1841,844" href="javascript:showLinkedOverlay('communicativeCompetence')">
+    </map>
+
+    <script>
+        // Switch to secondary page
+        function switchToSecondary() {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('secondaryPage').style.display = 'block';
+        }
+
+        // Switch back to main page
+        function switchToMain() {
+            document.getElementById('secondaryPage').style.display = 'none';
+            document.getElementById('mainPage').style.display = 'block';
+        }
+
+        // Open scroll container
+        function openScrollContainer() {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('scrollContainer').style.display = 'block';
+        }
+
+        // Close scroll container
+        function closeScrollContainer() {
+            document.getElementById('scrollContainer').style.display = 'none';
+            document.getElementById('mainPage').style.display = 'block';
+        }
+
+        // Show linked overlay
+        function showLinkedOverlay(id) {
+            document.getElementById('darkenOverlay').style.display = 'block';
+            document.getElementById(id).style.display = 'block';
+        }
+
+        // Close linked overlay
+        function closeLinkedOverlay(id) {
+            document.getElementById('darkenOverlay').style.display = 'none';
+            document.getElementById(id).style.display = 'none';
+        }
+
+        // Scale coordinates dynamically
+        function scaleCoordinates() {
+            scaleMap('map1', 'mainImage');
+            scaleMap('secondaryMap', 'secondaryImage');
+        }
+
+        function scaleMap(mapName, imgId) {
+            const img = document.getElementById(imgId);
+            const map = document.querySelector(`map[name="${mapName}"]`);
+            
+            if (!img || !map) return;
+
+            const scaleX = img.offsetWidth / img.naturalWidth || 1;
+            const scaleY = img.offsetHeight / img.naturalHeight || 1;
+
+            map.querySelectorAll('area').forEach(area => {
+                const original = area.dataset.originalCoords.split(',').map(Number);
+                const scaled = original.map((coord, i) => 
+                    Math.round(coord * (i % 2 === 0 ? scaleX : scaleY))
+                );
+                area.coords = scaled.join(',');
+            });
+        }
+
+        // Initialize maps
+        document.querySelectorAll('map').forEach(map => {
+            map.querySelectorAll('area').forEach(area => {
+                area.dataset.originalCoords = area.coords;
+            });
+        });
+
+        // Event listeners
+        window.addEventListener('load', scaleCoordinates);
+        window.addEventListener('resize', scaleCoordinates);
+    </script>
+</body>
+</html>
